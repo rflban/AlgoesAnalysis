@@ -10,6 +10,17 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wpedantic -g3 -fsanitize=
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 set(INC
+    include/WagnerFischer.h
+    include/LevenshteinRecursive.h
+    include/DamerauLevenshtein.h
+    include/DamerauLevenshteinRecursive.h
+)
+
+set(TSRC
+    include/template/WagnerFischer.hxx
+    include/template/LevenshteinRecursive.hxx
+    include/template/DamerauLevenshtein.hxx
+    include/template/DamerauLevenshteinRecursive.hxx
 )
 
 set(SRC
@@ -18,6 +29,7 @@ set(SRC
 
 add_executable(fn_aa_lab_01
     ${INC}
+    ${TSRC}
     ${SRC}
 )
 

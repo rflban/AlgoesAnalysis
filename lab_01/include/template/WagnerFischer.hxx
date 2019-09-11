@@ -5,8 +5,8 @@
 
 #include "Utility.h"
 
-template<typename _Word_t, class _Handler>
-int WagnerFischer<_Word_t, _Handler>::distance(_Word_t w1, int n1, _Word_t w2, int n2) {
+template<typename _Word_t>
+int WagnerFischer<_Word_t>::distance(_Word_t w1, int n1, _Word_t w2, int n2) {
     int **D = Util::createMatrix<int>(n1 + 1, n2 + 1);
     D[0][0] = 0;
 

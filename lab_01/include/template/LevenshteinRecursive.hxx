@@ -3,10 +3,8 @@
 
 #include "LevenshteinRecursive.h"
 
-#include <algorithm>
-
-template<typename _Word_t, class _Handler>
-int LevenshteinRecursive<_Word_t, _Handler>::distance(_Word_t w1, int n1, _Word_t w2, int n2) {
+template<typename _Word_t>
+int LevenshteinRecursive<_Word_t>::distance(_Word_t w1, int n1, _Word_t w2, int n2) {
     if (n1 == 0) {
         return n2 * insertCost;
     }

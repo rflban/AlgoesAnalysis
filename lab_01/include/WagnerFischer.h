@@ -3,9 +3,7 @@
 
 #include "EditDistanceMethod.h"
 
-class CharWordHandler;
-
-template <typename _Word_t, class _Handler = CharWordHandler>
+template <typename _Word_t>
 class WagnerFischer : public EditDistanceMethod<_Word_t> {
 public:
     WagnerFischer() = default;

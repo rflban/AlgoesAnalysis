@@ -3,9 +3,7 @@
 
 #include "EditDistanceMethod.h"
 
-class CharWordHandler;
-
-template <typename _Word_t, class _Handler = CharWordHandler>
+template <typename _Word_t>
 class LevenshteinRecursive : public EditDistanceMethod<_Word_t> {
 public:
     LevenshteinRecursive() = default;

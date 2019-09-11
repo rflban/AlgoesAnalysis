@@ -10,6 +10,8 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wpedantic -g3 -fsanitize=
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 set(INC
+    include/Utility.h
+
     include/WagnerFischer.h
     include/LevenshteinRecursive.h
     include/DamerauLevenshtein.h

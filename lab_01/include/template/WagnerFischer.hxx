@@ -2,11 +2,12 @@
 #define AAL01_WAGNERFISCHER_HXX_
 
 #include "WagnerFischer.h"
-#include <algorithm>
+
+#include "Utility.h"
 
 template<typename _Word_t, class _Handler>
 int WagnerFischer<_Word_t, _Handler>::distance(_Word_t w1, int n1, _Word_t w2, int n2) {
-    int D[n1 + 1][n2 + 1];
+    int **D = Util::createMatrix<int>(n1 + 1, n2 + 1);
     D[0][0] = 0;
 
     for (int j = 1; j <= n2; j++) {
@@ -28,7 +29,10 @@ int WagnerFischer<_Word_t, _Handler>::distance(_Word_t w1, int n1, _Word_t w2, i
         }
     }
 
-    return D[n1][n2];
+    int res = D[n1][n2];
+    delete[] D;
+
+    return res;
 }
 
 #endif // AAL01_WAGNERFISCHER_HXX_

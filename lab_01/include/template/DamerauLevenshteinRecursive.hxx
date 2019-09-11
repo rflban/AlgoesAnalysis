@@ -32,5 +32,5 @@ int DamerauLevenshteinRecursive<_Word_t>::distance(_Word_t w1, int n1, _Word_t w
     return res;
 }
 
-#endif AAL01_DAMERAULEVENSHTEINRECURSIVE_HXX_
+#endif // AAL01_DAMERAULEVENSHTEINRECURSIVE_HXX_
 

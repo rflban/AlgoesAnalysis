@@ -3,6 +3,8 @@
 
 #include "DamerauLevenshtein.h"
 
+#include "Utility.h"
+
 template<typename _Word_t>
 DamerauLevenshtein<_Word_t>::DamerauLevenshtein() :
     transposeCost(1)
@@ -10,7 +12,7 @@ DamerauLevenshtein<_Word_t>::DamerauLevenshtein() :
 
 template<typename _Word_t>
 int DamerauLevenshtein<_Word_t>::distance(_Word_t w1, int n1, _Word_t w2, int n2) {
-    int D[n1 + 1][n2 + 1];
+    int **D = Util::createMatrix<int>(n1 + 1, n2 + 1);
     D[0][0] = 0;
 
     for (int j = 1; j <= n2; j++) {
@@ -38,7 +40,10 @@ int DamerauLevenshtein<_Word_t>::distance(_Word_t w1, int n1, _Word_t w2, int n2
         }
     }
 
-    return D[n1][n2];
+    int res = D[n1][n2];
+    delete[] D;
+
+    return res;
 }
 
 #endif // AAL01_DAMERAULEVENSHTEIN_HXX_

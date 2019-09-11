@@ -1,0 +1,8 @@
+#ifndef AAL01_EDITDISTANCECALCULATOR_H_
+#define AAL01_EDITDISTANCECALCULATOR_H_
+
+class EditDistanceCalculator {
+};
+
+#endif // AAL01_EDITDISTANCECALCULATOR_H_
+

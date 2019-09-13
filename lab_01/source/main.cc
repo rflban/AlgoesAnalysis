@@ -1,48 +1,38 @@
 #include <iostream>
 
-#include "WagnerFischer.h"
-#include "LevenshteinRecursive.h"
-#include "DamerauLevenshtein.h"
-#include "DamerauLevenshteinRecursive.h"
+#include "EditDistanceTester.h"
+#include "CharWordHandler.h"
 
 using namespace std;
 
-class CharWordHandler {
-public:
-    static int len(const char *str) {
-        int l;
-
-        for (l = 0; str[l] != 0; l++);
-
-        return l;
-    }
-};
-
-int main() {
+int main(int argc, char **argv) {
     std::string s1;
     std::string s2;
+    auto tester = new EditDistanceTester<string>;
 
-    WagnerFischer<const char *> wf;
-    LevenshteinRecursive<const char *> lr;
-    DamerauLevenshtein<const char *> dl;
-    DamerauLevenshteinRecursive<const char *> dlr;
+    if (argc > 0) {
+        switch (argv[0][0]) {
+        case '0':
+            tester->toLevenshteinRec();
+            break;
+        case '1':
+            tester->toWagnerFischer();
+            break;
+        case '2':
+            tester->toDamerauLevenshtein();
+            break;
+        case '3':
+            tester->toDamerauLevenshteinRec();
+            break;
+        }
+    }
 
-    WagnerFischer<string> swf;
-    LevenshteinRecursive<string> slr;
-    DamerauLevenshtein<string> sdl;
-    DamerauLevenshteinRecursive<string> sdlr;
+    while ((cin >> s1 >> s2).good()) {
+        cout << tester->calculate(s1, s2) << " ";
+        cout << tester->timeTestResult() << '\n';
+    }
 
-    cin >> s1 >> s2;
-
-    cout << wf.distance(s1.c_str(), s1.size(), s2.c_str(), s2.size()) << '\n';
-    cout << lr.distance(s1.c_str(), s1.size(), s2.c_str(), s2.size()) << '\n';
-    cout << dl.distance(s1.c_str(), s1.size(), s2.c_str(), s2.size()) << '\n';
-    cout << dlr.distance(s1.c_str(), s1.size(), s2.c_str(), s2.size()) << '\n';
-
-    cout << swf.distance(s1, s1.size(), s2, s2.size()) << '\n';
-    cout << slr.distance(s1, s1.size(), s2, s2.size()) << '\n';
-    cout << sdl.distance(s1, s1.size(), s2, s2.size()) << '\n';
-    cout << sdlr.distance(s1, s1.size(), s2, s2.size()) << '\n';
+    delete tester;
 
     return 0;
 }

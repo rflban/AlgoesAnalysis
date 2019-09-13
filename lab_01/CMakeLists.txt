@@ -12,10 +12,17 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(INC
     include/Utility.h
 
+    include/EditDistanceMethod.h
     include/WagnerFischer.h
     include/LevenshteinRecursive.h
     include/DamerauLevenshtein.h
     include/DamerauLevenshteinRecursive.h
+
+    include/EditDistanceCalculator.h
+    include/EditDistanceTester.h
+
+    include/TestManager.h
+    include/CharWordHandler.h
 )
 
 set(TSRC
@@ -23,10 +30,14 @@ set(TSRC
     include/template/LevenshteinRecursive.hxx
     include/template/DamerauLevenshtein.hxx
     include/template/DamerauLevenshteinRecursive.hxx
+
+    include/template/EditDistanceTester.hxx
 )
 
 set(SRC
     source/main.cc
+
+    source/TestManager.cc
 )
 
 add_executable(fn_aa_lab_01

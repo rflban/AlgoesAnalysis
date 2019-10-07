@@ -3,9 +3,11 @@ cmake_minimum_required(VERSION 3.1.0)
 project(fn_aa_lab_01)
 
 set(CMAKE_CXX_STANDARD 14)
+#set(CMAKE_CXX_COMPILER g++)
 set(CMAKE_CXX_COMPILER clang++)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wpedantic -g3 -fsanitize=address,undefined -fno-omit-frame-pointer")
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wpedantic -g3")
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 

@@ -8,9 +8,12 @@
 #include "DamerauLevenshtein.h"
 #include "DamerauLevenshteinRecursive.h"
 
+#include <iostream>
+
 template<typename _Word_t, class _WordHandler>
 EditDistanceTester<_Word_t, _WordHandler>::EditDistanceTester() :
-    method(new LevenshteinRecursive<_Word_t>)
+    method(new LevenshteinRecursive<_Word_t>),
+    showOptInfo(false)
 {
 }
 
@@ -22,10 +25,28 @@ EditDistanceTester<_Word_t, _WordHandler>::~EditDistanceTester() {
 template<typename _Word_t, class _WordHandler>
 int EditDistanceTester<_Word_t, _WordHandler>::calculate(_Word_t w1, _Word_t w2) {
     int res;
+    int n1 = _WordHandler::len(w1);
+    int n2 = _WordHandler::len(w2);
 
     start();
-    res = method->distance(w1, _WordHandler::len(w1), w2, _WordHandler::len(w2));
+    res = method->distance(w1, n1, w2, n2);
     stop();
+
+    if (showOptInfo) {
+        int **matrix = method->raw(w1, n1, w2, n2);
+
+        if (matrix) {
+            for (int i = 0; i < n1; i++) {
+                for (int j = 0; j < n2; j++) {
+                    std::cout << matrix[i][j] << " ";
+                }
+
+                std::cout << '\n';
+            }
+
+            delete[] matrix;
+        }
+    }
 
     return res;
 }
@@ -52,6 +73,16 @@ template<typename _Word_t, class _WordHandler>
 void EditDistanceTester<_Word_t, _WordHandler>::toDamerauLevenshteinRec() {
     delete method;
     method = new DamerauLevenshteinRecursive<_Word_t>;
+}
+
+template<typename _Word_t, class _WordHandler>
+void EditDistanceTester<_Word_t, _WordHandler>::enableOptInfo() {
+    showOptInfo = true;
+}
+
+template<typename _Word_t, class _WordHandler>
+void EditDistanceTester<_Word_t, _WordHandler>::disableOptInfo() {
+    showOptInfo = false;
 }
 
 #endif // AAL01_EDITDISTANCETESTER_HXX_

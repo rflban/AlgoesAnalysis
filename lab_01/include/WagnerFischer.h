@@ -10,6 +10,7 @@ public:
     virtual ~WagnerFischer() = default;
 
     int distance(_Word_t w1, int n1, _Word_t w2, int n2) override;
+    int **raw(_Word_t w1, int n1, _Word_t w2, int n2) override;
 
 protected:
     using EditDistanceMethod<_Word_t>::insertCost;

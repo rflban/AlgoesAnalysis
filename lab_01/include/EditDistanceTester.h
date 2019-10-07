@@ -22,13 +22,15 @@ public:
     void toDamerauLevenshtein();
     void toDamerauLevenshteinRec();
 
+    void enableOptInfo();
+    void disableOptInfo();
+
 private:
     EditDistanceMethod<_Word_t> *method;
+    bool showOptInfo;
 };
 
 #include "template/EditDistanceTester.hxx"
-
-int a;
 
 #endif // AAL01_EDITDISTANCETESTER_H_
 

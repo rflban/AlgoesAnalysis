@@ -10,6 +10,7 @@ public:
     virtual ~EditDistanceMethod() = default;
 
     virtual int distance(_Word_t w1, int n1, _Word_t w2, int n2) = 0;
+    virtual int **raw(_Word_t w1,int n1, _Word_t w2, int n2) = 0;
 
     inline void
     setInsertCost(int cost) {

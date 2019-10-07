@@ -6,12 +6,14 @@
 using namespace std;
 
 int main(int argc, char **argv) {
+    bool showTime = false;
+
     std::string s1;
     std::string s2;
     auto tester = new EditDistanceTester<string>;
 
-    if (argc > 0) {
-        switch (argv[0][0]) {
+    for (int idx = 1; idx < argc; idx++) {
+        switch (argv[idx][0]) {
         case '0':
             tester->toLevenshteinRec();
             break;
@@ -24,12 +26,27 @@ int main(int argc, char **argv) {
         case '3':
             tester->toDamerauLevenshteinRec();
             break;
+        case 'o':
+            tester->enableOptInfo();
+            break;
+        case 'O':
+            tester->disableOptInfo();
+            break;
+        case 't':
+            showTime = true;
+            break;
+        case 'T':
+            showTime = false;
         }
     }
 
     while ((cin >> s1 >> s2).good()) {
         cout << tester->calculate(s1, s2) << " ";
-        cout << tester->timeTestResult() << '\n';
+
+        if (showTime)
+            cout << tester->timeTestResult();
+
+        cout << '\n';
     }
 
     delete tester;

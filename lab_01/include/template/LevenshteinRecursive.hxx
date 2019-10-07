@@ -5,10 +5,10 @@
 
 template<typename _Word_t>
 int LevenshteinRecursive<_Word_t>::distance(_Word_t w1, int n1, _Word_t w2, int n2) {
-    if (n1 == 0) {
+    if (n1 <= 0) {
         return n2 * insertCost;
     }
-    if (n2 == 0) {
+    if (n2 <= 0) {
         return n1 * deleteCost;
     }
 
@@ -19,6 +19,11 @@ int LevenshteinRecursive<_Word_t>::distance(_Word_t w1, int n1, _Word_t w2, int 
                        distance(w1, n1 - 1, w2, n2 - 1) + replaceCost * !isSame);
 
     return res;
+}
+
+template<typename _Word_t>
+int **LevenshteinRecursive<_Word_t>::raw(_Word_t, int, _Word_t, int) {
+    return nullptr;
 }
 
 #endif // AAL01_LEVENSHTEINRECURSIVE_HXX_

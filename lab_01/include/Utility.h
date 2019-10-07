@@ -17,6 +17,11 @@ _T **createMatrix(size_t n, size_t m) {
     return matrix;
 }
 
+template<typename _T, int _N, int _M>
+struct autoMatrix {
+    _T instance[_N][_M];
+};
+
 }
 
 #endif // AAL01_UTILITY_H_

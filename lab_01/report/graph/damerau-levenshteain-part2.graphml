@@ -309,7 +309,7 @@ w1[i-2] = w2[j-1]<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelM
             <y:Point x="-154.23755319149018" y="302.1249572095589"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
-          <y:Arrows source="none" target="standard"/>
+          <y:Arrows source="none" target="delta"/>
           <y:BendStyle smoothed="false"/>
         </y:PolyLineEdge>
       </data>

@@ -17,7 +17,7 @@
 \end{itemize}
 
 При этом cost(x) есть обозначение стоимости некоторой операции x. Будем считать, что символы в строках нумеруются с первого. Пусть $S_{1}$ и $S_{2}$ - две строки с длинами N и M соответственно. Тогда расстояние Левенштейна вычисляется по формуле D(M, N):
-\begin{displaymath}
+\begin{equation}
 D(i,j) = \left\{ \begin{array}{ll}
  0, & \textrm{$i = 0, j = 0$}\\
  i * cost(D), & \textrm{$j = 0, i > 0$}\\
@@ -29,7 +29,7 @@ D(i-1, j) + cost(D), &\textrm{$j > 0, i > 0, S_1[i] \neq S_2[j]$}\\
 D(i-1, j-1) + cost(R)\\
 ),
   \end{array} \right.
-\end{displaymath}
+\end{equation}
 где min(a, b, c) возвращает наименьшее значение из a, b, c.
 
 \subsection{Алгоритм Дамерау-Левенштейна}
@@ -42,16 +42,16 @@ D(i-1, j-1) + cost(R)\\
 \end{itemize}
 
 При тех же обозначениях имеем формулу:
-\begin{displaymath}
+\begin{equation}
 D(i,j) = \left\{ \begin{array}{ll}
  min(A, D(i - 2, j - 2) + cost(T), & \textrm{$i > 1, j > 1,$}\\
  & \textrm{$S_1[i] = S_2[j - 1],$}\\
  & \textrm{$S_1[i - 1] = S_2[j]$}\\
  A & \textrm{Иначе}\\
   \end{array} \right.
-\end{displaymath}
+\end{equation}
 где A:
-\begin{displaymath}
+\begin{equation}
 A = \left\{ \begin{array}{ll}
  0, & \textrm{$i = 0, j = 0$}\\
  i * cost(D), & \textrm{$j = 0, i > 0$}\\
@@ -63,5 +63,5 @@ D(i-1, j) + cost(D), &\textrm{$j > 0, i > 0, S_1[i] \neq S_2[j]$}\\
 D(i-1, j-1) + cost(R)\\
 ),
   \end{array} \right.
-\end{displaymath}
+\end{equation}
 

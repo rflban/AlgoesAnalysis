@@ -4,9 +4,11 @@
 \section{Требования к программному обеспечению}
 Требования к вводу:
 \begin{itemize}
-    \item На вход подаются две строки, разделённые переносом строки;
+    \item На вход подаются два слова;
+    \item Каждое слово завершается символом переноса строки;
+    \item Пробел может быть в составе слова;
     \item Одна и та же буква в верхнем и нижнем регистрах считается как разные символы;
-    \item Пустая строка может быть введена.
+    \item Пустое слово допускается.
 \end{itemize}
 Требования к выводу:
 \begin{itemize}
@@ -15,7 +17,13 @@
 \end{itemize}
 Требования к программе:
 \begin{itemize}
-    \item Выбор алгоритма происходит через аргументы командной строки.
+    \item Выбор алгоритма происходит через аргументы командной строки путём передачи его номера:
+        \begin{enumerate}[1.]
+            \item алгортм Вагнера-Фишера;
+            \item алгортм Дамерау-Левенштейна (матричная реализация);
+            \item алгортм Дамерау-Левенштейна (рекурсивная реализация).
+        \end{enumerate}
+
 \end{itemize}
 
 \section{Средства реализации}
@@ -148,29 +156,25 @@ int DamerauLevenshteinRecursive<_Word_t>::distance(_Word_t w1, int n1,
  	\hline
  	1 & some & any & 4 & 4\\
  	\hline
- 	2 & man & person & 6 & 6\\
+ 	2 & & nothing & 7 & 7\\
  	\hline
- 	3 & & nothing & 7 & 7\\
+ 	3 & & & 0 & 0\\
  	\hline
- 	4 & & & 0 & 0\\
+ 	4 & bashrc & bashcr & 2 & 1\\
  	\hline
- 	5 & bashrc & bashcr & 2 & 1\\
+ 	5 & bus & BuS & 2 & 2\\
  	\hline
- 	6 & goose & duck & 5 & 5\\
+ 	6 & electricity & city & 7 & 7\\
  	\hline
- 	7 & bus & BuS & 2 & 2\\
+ 	7 & powerfull & powerless & 4 & 4\\
  	\hline
- 	8 & electricity & city & 7 & 7\\
+ 	8 & grow & flow & 2 & 2\\
  	\hline
- 	9 & powerfull & powerless & 4 & 4\\
+ 	9 & rise & rice & 1 & 1\\
  	\hline
- 	10 & grow & flow & 2 & 2\\
+    10 & legal & illegal & 2 & 2\\
  	\hline
- 	11 & rise & rice & 1 & 1\\
- 	\hline
- 	12 & fake & lake & 1 & 1\\
- 	\hline
-    13 & same & same & 0 & 0\\
+    11 & same & same & 0 & 0\\
     \hline
 	\end{tabular}
 \end{table}

@@ -1,15 +1,11 @@
 some
 any
-man
-persom
 
 nothing
 
 
 bashrc
 bashcr
-goose
-duck
 bus
 BuS
 electricity
@@ -20,5 +16,7 @@ grow
 flow
 rise
 rice
-lake
-fake
+legal
+illegal
+same
+same

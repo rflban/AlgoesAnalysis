@@ -40,7 +40,10 @@ int main(int argc, char **argv) {
         }
     }
 
-    while ((cin >> s1 >> s2).good()) {
+    while (cin.good()) {
+        getline(cin, s1);
+        getline(cin, s2);
+
         cout << tester->calculate(s1, s2) << " ";
 
         if (showTime)

@@ -2,10 +2,32 @@
 \label{cha:impl}
 
 \section{Требования к программному обеспечению}
+Требования к вводу:
+\begin{itemize}
+    \item На вход подаются две строки, разделённые переносом строки;
+    \item Одна и та же буква в верхнем и нижнем регистрах считается как разные символы;
+    \item Пустая строка может быть введена.
+\end{itemize}
+Требования к выводу:
+\begin{itemize}
+    \item Редакционное расстояние;
+    \item В случае матричной реализации алгоритма выводить матрицу, полученную в ходе вычисления расстояния.
+\end{itemize}
+Требования к программе:
+\begin{itemize}
+    \item Выбор алгоритма происходит через аргументы командной строки.
+\end{itemize}
 
 \section{Средства реализации}
+Для реализации программы вычисления редакционного расстояния мной был выбран язык программирования C++. В рамках текущей задачи данный язык программирования имеет ряд существенных преимуществ:
+\begin{itemize}
+    \item Статическая типизация;
+    \item Близость к низкоуровневому C при наличии многих возможностей высокоуровневых языков;
+    \item Встроенная библиотека std::chrono, позовляющая измерять процессорное время.
+\end{itemize}
 
 \section{Листинги кода}
+Реализации алгоримтов Вагнера-Фишера и матричной и рекурсивной вариаций Дамерау-Левенштейна приведены в листингах 3.1, 3.2, 3.3 соответственно.
 
 \noindent\begin{minipage}{\textwidth}
 \begin{lstlisting}[caption=Расстояние Левенштейна (матричная реализация)]
@@ -68,7 +90,8 @@ int DamerauLevenshtein<_Word_t>::distance(_Word_t w1, int n1,
 
                 if (i > 1 && j > 1) {
                     if (w1[i - 1] == w2[j - 2] && w1[i - 2] == w2[j - 1]) {
-                        D[i][j] = std::min(D[i - 2][j - 2] + transposeCost, D[i][j]);
+                        D[i][j] = std::min(D[i - 2][j - 2] + transposeCost,
+                                           D[i][j]);
                     }
                 }
             }
@@ -99,11 +122,13 @@ int DamerauLevenshteinRecursive<_Word_t>::distance(_Word_t w1, int n1,
 
     int res = std::min(std::min(distance(w1, n1 - 1, w2, n2) + deleteCost,
                                 distance(w1, n1, w2, n2 - 1) + insertCost),
-                       distance(w1, n1 - 1, w2, n2 - 1) + replaceCost * !isSame);
+                       distance(w1, n1 - 1, w2, n2 - 1) + replaceCost *
+                                                          !isSame);
 
     if (n1 > 1 && n2 > 1) {
         if (w1[n1 - 1] == w2[n2 - 2] && w1[n1 - 2] == w2[n2 - 1]) {
-            res = std::min(distance(w1, n1 - 2, w2, n2 - 2) + transposeCost, res);
+            res = std::min(distance(w1, n1 - 2, w2, n2 - 2) +
+                           transposeCost, res);
         }
     }
 
@@ -113,4 +138,40 @@ int DamerauLevenshteinRecursive<_Word_t>::distance(_Word_t w1, int n1,
 \end{minipage}
 
 \section{Описание тестирования}
+Для тестирования программы были подготовлены данные, предствленные в таблицe 3.1.
+
+\begin{table}[H]
+    \caption{Тестовые данные}
+	\begin{tabular}{|c|c|c|c|c|}
+ 	\hline
+    \No{} & Строка 1 & Строка 2 & \makecell{Ожидаемое расстояние\\Левенштейна} & \makecell{Ожидаемое расстояние\\Дамерау-Левенштейна} \\
+ 	\hline
+ 	1 & some & any & 4 & 4\\
+ 	\hline
+ 	2 & man & person & 6 & 6\\
+ 	\hline
+ 	3 & & nothing & 7 & 7\\
+ 	\hline
+ 	4 & & & 0 & 0\\
+ 	\hline
+ 	5 & bashrc & bashcr & 2 & 1\\
+ 	\hline
+ 	6 & goose & duck & 5 & 5\\
+ 	\hline
+ 	7 & bus & BuS & 2 & 2\\
+ 	\hline
+ 	8 & electricity & city & 7 & 7\\
+ 	\hline
+ 	9 & powerfull & powerless & 4 & 4\\
+ 	\hline
+ 	10 & grow & flow & 2 & 2\\
+ 	\hline
+ 	11 & rise & rice & 1 & 1\\
+ 	\hline
+ 	12 & fake & lake & 1 & 1\\
+ 	\hline
+    13 & same & same & 0 & 0\\
+    \hline
+	\end{tabular}
+\end{table}
 

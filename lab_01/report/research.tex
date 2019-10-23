@@ -26,6 +26,7 @@
 \end{figure}
 
 \section{Результаты тестирования}
+Тестирование всех трёх реализаций алгоритмов прошло успешно. Результаты тестов представлены в таблицах 4.1, 4.2, 4.3.
 
 \begin{table}[H]
     \caption{Результаты тестирования алгоритма Вагнера-Фишера}
@@ -119,4 +120,52 @@
     \hline
 	\end{tabular}
 \end{table}
+
+\section{Эксперимент по замеру времени}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            width=0.8*\linewidth,
+            xlabel={Длина слова},
+            ylabel={Время (нс)},
+            grid=major,
+            legend pos=north west,
+        ]
+
+        \addplot[color=red]
+            table[x=len,y=time,col sep=comma]{./data/wagner-fischer-1.csv};
+        \addplot[color=blue]
+            table[x=len,y=time,col sep=comma]{./data/damerau-levenshtein-1.csv};
+
+        \legend{Вагнера-Фишера, Дамерау-Левенштейна}
+
+        \end{axis}
+    \end{tikzpicture}
+    \caption{График сравнения алгоритма Вагнера-Фишера и матричного алгоритма Дамерау-Левенштейна}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            width=0.8*\linewidth,
+            xlabel={Длина слова},
+            ylabel={Время (нс)},
+            grid=major,
+            legend pos=north west,
+        ]
+
+        \addplot[color=red]
+            table[x=len,y=time,col sep=comma]{./data/damerau-levenshtein-rec-2.csv};
+        \addplot[color=blue]
+            table[x=len,y=time,col sep=comma]{./data/damerau-levenshtein-2.csv};
+
+        \legend{рекурсивный, матричный}
+
+        \end{axis}
+    \end{tikzpicture}
+    \caption{График сравнения рекурсивного и матричного алгоритмов Дамерау-Левенштейна}
+\end{figure}
 

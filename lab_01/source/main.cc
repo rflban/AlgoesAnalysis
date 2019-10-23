@@ -6,8 +6,13 @@
 using namespace std;
 
 int main(int argc, char **argv) {
+    int testTimes = 5;
+
     bool showTime = false;
     bool isLoop = false;
+    bool showMinLen = false;
+    bool showMaxLen = false;
+    bool showDist = true;
 
     std::string s1;
     std::string s2;
@@ -47,14 +52,48 @@ int main(int argc, char **argv) {
         case 'L':
             isLoop = false;
             break;
+        case 'i':
+            showMinLen = true;
+            break;
+        case 'I':
+            showMinLen = false;
+            break;
+        case 's':
+            showMaxLen = true;
+            break;
+        case 'S':
+            showMaxLen = false;
+            break;
+        case 'd':
+            showDist = true;
+            break;
+        case 'D':
+            showDist = false;
+            break;
         }
     }
 
     while (getline(cin, s1), getline(cin, s2), cin.good()) {
-        cout << tester->calculate(s1, s2) << " ";
+
+        int dist = tester->calculate(s1, s2);
+        long long timeRes = tester->timeTestResult();
+
+        for (int idx = 0; idx < testTimes - 1; idx++) {
+            tester->calculate(s1, s2);
+            timeRes += tester->timeTestResult();
+        }
+        timeRes /= testTimes;
+
+        if (showDist)
+            cout << dist << " ";
+
+        if (showMinLen)
+            cout << min(s1.size(), s2.size()) << " ";
+        if (showMaxLen)
+            cout << max(s1.size(), s2.size()) << " ";
 
         if (showTime)
-            cout << tester->timeTestResult();
+            cout << timeRes;
 
         cout << '\n';
 

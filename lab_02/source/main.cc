@@ -79,6 +79,12 @@ int main(int argc, char **argv)
 
     double **matrix1 = readMatrix(n1, m1);
     double **matrix2 = readMatrix(n2, m2);
+
+    if (matrix1 == NULL || matrix2 == NULL)
+    {
+        exit(1);
+    }
+
     double **res = Util::createMatrix<double>(n1, m2);
 
     begin = tick();
@@ -90,7 +96,7 @@ int main(int argc, char **argv)
     delete[] matrix2;
     delete[] res;
 
-    cout << toNanoSecs(end - begin).count() << '\n';
+    //cout << toNanoSecs(end - begin).count() << '\n';
 
     return 0;
 }

@@ -1,0 +1,92 @@
+\chapter{Исследовательский раздел}
+\label{cha:research}
+
+В данном разделе будет произведено исследование разработанной программы.
+
+\section{Эксперименты по замеру времени}
+
+На рисунках \ref{img:pltsorted}, \ref{img:unsorted}, \ref{img:pltrandom} приведены графики зависимости времени выполнения сортировки от длины сортируемого массива для отсортированных, отсортированных в обратном порядке и произвольных массивов соответственно.
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            width=0.8*\linewidth,
+            xlabel={Длина массива},
+            ylabel={Время (нс)},
+            grid=major,
+            legend pos=north west,
+        ]
+
+        \addplot[color=red]
+            table[x=len,y=time,col sep=comma]{./data/qsi.csv};
+        \addplot[color=blue]
+            table[x=len,y=time,col sep=comma]{./data/ini.csv};
+        \addplot[color=green]
+            table[x=len,y=time,col sep=comma]{./data/shi.csv};
+
+        \legend{быстрая сортировка, сортировка вставками, шейкерная сортировка}
+
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Отсортированный массив}
+    \label{img:pltsorted}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            width=0.8*\linewidth,
+            xlabel={Длина массива},
+            ylabel={Время (нс)},
+            grid=major,
+            legend pos=north west,
+        ]
+
+        \addplot[color=red]
+            table[x=len,y=time,col sep=comma]{./data/qsd.csv};
+        \addplot[color=blue]
+            table[x=len,y=time,col sep=comma]{./data/ind.csv};
+        \addplot[color=green]
+            table[x=len,y=time,col sep=comma]{./data/shd.csv};
+
+        \legend{быстрая сортировка, сортировка вставками, шейкерная сортировка}
+
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Обратно отсортированный массив}
+    \label{img:unsorted}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            width=0.8*\linewidth,
+            xlabel={Длина массива},
+            ylabel={Время (нс)},
+            grid=major,
+            legend pos=north west,
+        ]
+
+        \addplot[color=red]
+            table[x=len,y=time,col sep=comma]{./data/qsr.csv};
+        \addplot[color=blue]
+            table[x=len,y=time,col sep=comma]{./data/inr.csv};
+        \addplot[color=green]
+            table[x=len,y=time,col sep=comma]{./data/shr.csv};
+
+        \legend{быстрая сортировка, сортировка вставками, шейкерная сортировка}
+
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Произвольный массив}
+    \label{img:pltrandom}
+\end{figure}
+
+Данный эксперимент проводился на ноутбуке, подключённом к сети питания. Модель процессора ноутбука: Intel i5-8400H с максимальной тактовой частотой 2.500 ГГц в обычном режиме.
+
+\section{Вывод}
+Из полученных графиков видно, что скорость работы быстрой сортировки превосходит две другие в случаях обратно отсортированных и произвольных массивов. При этом шейкерная сортировка уступает сортировке вставками в случаях произвольных и отсортированных массивов.
+

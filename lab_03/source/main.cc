@@ -81,11 +81,22 @@ int main(int argc, char **argv)
 
     std::cin >> len;
 
+    if (len <= 0)
+    {
+        exit(1);
+    }
+
     int arr[len];
     for (int i = 0; i < len; i++)
     {
         std::cin >> arr[i];
+
+        if (!std::cin.good())
+        {
+            exit(1);
+        }
     }
+    std::cout << '\n';
 
     sort(arr, len, comparator);
 

@@ -1,0 +1,126 @@
+\chapter{Исследовательский раздел}
+\label{cha:research}
+
+В данном разделе будут производиться эксперементы над корректно реализованной программой.
+
+\section{Эксперименты по замеру времени}
+
+На рисунках \ref{img:even1}, \ref{img:even2} приведены графики сравнения непараллелизированной реализации алгоритма Винограда и параллелизированной на разном кол-ве потоков для чётных длин матриц, на \ref{img:uneven1}, \ref{img:uneven2} - для нечётных.
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            width=0.8*\linewidth,
+            xlabel={Длина матрицы},
+            ylabel={Время (нс)},
+            grid=major,
+            legend pos=north west,
+            xtick={0,100,...,1000}
+        ]
+
+        \addplot[color=green]
+            table[x=len,y=time,col sep=comma]{./data/test_even_owinograd.csv};
+        \addplot[color=red]
+            table[x=len,y=time,col sep=comma]{./data/test_even_1.csv};
+        \legend{непараллелизированный, 1 поток}
+
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Чётная длина, сравнение параллельных и последовательных вычислений}
+    \label{img:even1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            width=0.8*\linewidth,
+            xlabel={Длина матрицы},
+            ylabel={Время (нс)},
+            grid=major,
+            legend pos=north west,
+            xtick={0,100,...,1000}
+        ]
+
+        \addplot[color=red]
+            table[x=len,y=time,col sep=comma]{./data/test_even_1.csv};
+        \addplot[color=green]
+            table[x=len,y=time,col sep=comma]{./data/test_even_2.csv};
+        \addplot[color=blue]
+            table[x=len,y=time,col sep=comma]{./data/test_even_4.csv};
+        \addplot[color=yellow]
+            table[x=len,y=time,col sep=comma]{./data/test_even_8.csv};
+        \addplot[color=magenta]
+            table[x=len,y=time,col sep=comma]{./data/test_even_16.csv};
+        \addplot[color=cyan]
+            table[x=len,y=time,col sep=comma]{./data/test_even_32.csv};
+        \legend{1 поток, 2 потока, 4 потока, 8 потоков, 16 потоков, 32 потока}
+
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Чётная длина, сравнение параллельных вычислений при разном кол-ве потоков}
+    \label{img:even2}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            width=0.8*\linewidth,
+            xlabel={Длина матрицы},
+            ylabel={Время (нс)},
+            grid=major,
+            legend pos=north west,
+            xtick={0,100,...,1000}
+        ]
+
+        \addplot[color=green]
+            table[x=len,y=time,col sep=comma]{./data/test_uneven_owinograd.csv};
+        \addplot[color=red]
+            table[x=len,y=time,col sep=comma]{./data/test_uneven_1.csv};
+        \legend{непараллелизированный, 1 поток}
+
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Нечётная длина, сравнение параллельных и последовательных вычислений}
+    \label{img:uneven1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            width=0.8*\linewidth,
+            xlabel={Длина матрицы},
+            ylabel={Время (нс)},
+            grid=major,
+            legend pos=north west,
+            xtick={0,100,...,1000}
+        ]
+
+        \addplot[color=red]
+            table[x=len,y=time,col sep=comma]{./data/test_uneven_1.csv};
+        \addplot[color=green]
+            table[x=len,y=time,col sep=comma]{./data/test_uneven_2.csv};
+        \addplot[color=blue]
+            table[x=len,y=time,col sep=comma]{./data/test_uneven_4.csv};
+        \addplot[color=yellow]
+            table[x=len,y=time,col sep=comma]{./data/test_uneven_8.csv};
+        \addplot[color=magenta]
+            table[x=len,y=time,col sep=comma]{./data/test_uneven_16.csv};
+        \addplot[color=cyan]
+            table[x=len,y=time,col sep=comma]{./data/test_uneven_32.csv};
+        \legend{1 поток, 2 потока, 4 потока, 8 потоков, 16 потоков, 32 потока}
+
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Нечётная длина, сравнение параллельных вычислений при разном кол-ве потоков}
+    \label{img:uneven2}
+\end{figure}
+
+Данный эксперимент проводился на ноутбуке, подключённом к сети питания. Модель процессора ноутбука: Intel i5-8400H с максимальной тактовой частотой 2.500 ГГц в обычном режиме и 8 логическими ядрами.
+
+\section{Вывод}
+Исходя из полученых графиков, можно заключить, что распараллеливание значительно ускоряет вычисления, по при этом не имеет смысла разбивать их на число потоков большее, чем количество логических ядер процессора, на котором эти вычисления проводятся.
+

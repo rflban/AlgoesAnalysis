@@ -35,7 +35,7 @@ public:
     void MatrixMul(MatrixDescriptor &res, MatrixDescriptor &md1, MatrixDescriptor &md2,
                    size_t start, size_t end)
     {
-        ::MatrixMul(res.data, md1.data + start, md2.data, end, md2.m, md1.m);
+        ::MatrixMul(res.data + start, md1.data  + start, md2.data, end - start, md2.m, md1.m);
     }
 };
 
@@ -63,6 +63,11 @@ int main(int argc, char **argv)
 
     std::cin >> threadsQty;
 
+    if (!std::cin.good() || threadsQty <= 0)
+    {
+        exit(1);
+    }
+
     if (doTest)
     {
         timeTest(threadsQty, isEven);
@@ -72,6 +77,11 @@ int main(int argc, char **argv)
     std::thread *threads = new std::thread[threadsQty];
 
     std::cin >> n;
+
+    if (!std::cin.good() || n < threadsQty)
+    {
+        exit(1);
+    }
 
     double **matrix1 = readMatrix(n, n);
     double **matrix2 = readMatrix(n, n);
@@ -104,6 +114,7 @@ int main(int argc, char **argv)
         threads[i].join();
     }
 
+    printf("Threads quantity: %d\nMatrix len: %d\n", threadsQty, n);
     printMatrix(matrix1, n, n);
     printf("\n");
     printMatrix(matrix2, n, n);
@@ -204,6 +215,8 @@ void timeTest(int threadsQty, bool isEven)
             size_t start = 0;
             size_t end = start + step + n % threadsQty;
 
+            t1 = tick();
+
             for (int i = 0; i < threadsQty; i++)
             {
                 threads[i] = std::thread(Multythread::MatrixMul, std::ref(md3), std::ref(md1), std::ref(md2), start, end);
@@ -211,8 +224,6 @@ void timeTest(int threadsQty, bool isEven)
                 start = end;
                 end += step;
             }
-
-            t1 = tick();
 
             for (int i = 0; i < threadsQty; i++)
             {

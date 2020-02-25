@@ -3,8 +3,7 @@
 #include <iostream>
 
 void MatrixMul(double **res, double **matrix1, double **matrix2,
-               size_t n, size_t m, size_t r,
-               size_t start, size_t end)
+               size_t n, size_t m, size_t r)
 {
     double temp;
 
@@ -13,7 +12,7 @@ void MatrixMul(double **res, double **matrix1, double **matrix2,
 
     double r_div_2 = r >> 1;
 
-    for (size_t i = start; i < end; i++)
+    for (size_t i = 0; i < n; i++)
     {
         temp = 0;
 
@@ -37,7 +36,7 @@ void MatrixMul(double **res, double **matrix1, double **matrix2,
         mulv[j] = temp;
     }
 
-    for (size_t i = start; i < end; i++)
+    for (size_t i = 0; i < n; i++)
     {
         for (size_t j = 0; j < m; j++)
         {
@@ -55,7 +54,7 @@ void MatrixMul(double **res, double **matrix1, double **matrix2,
 
     if (r & 1)
     {
-        for (size_t i = start; i < end; i++)
+        for (size_t i = 0; i < n; i++)
             for (size_t j = 0; j < m; j++)
                 res[i][j] += matrix1[i][r - 1] * matrix2[r - 1][j];
     }

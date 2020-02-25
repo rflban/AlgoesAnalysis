@@ -35,7 +35,7 @@ public:
     void MatrixMul(MatrixDescriptor &res, MatrixDescriptor &md1, MatrixDescriptor &md2,
                    size_t start, size_t end)
     {
-        ::MatrixMul(res.data, md1.data, md2.data, md1.n, md2.m, md1.m, start, end);
+        ::MatrixMul(res.data, md1.data + start, md2.data, end, md2.m, md1.m);
     }
 };
 

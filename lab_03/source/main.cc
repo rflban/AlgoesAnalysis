@@ -16,8 +16,7 @@ TimeInt to_nanosecs(const Duration &d)
     return std::chrono::duration_cast<std::chrono::nanoseconds>(d).count();
 }
 
-bool comparator(int v1, int v2)
-{
+bool comparator(int v1, int v2) {
     return v1 > v2;
 }
 
@@ -120,6 +119,8 @@ void test(void (*sort)(int *, int, bool (*)(int, int)),
 
     for (int len = minQty; len <= maxQty; len += step)
     {
+        timesum = 0;
+
         for (int i = 0; i < REPEATS; i++)
         {
             fill(data, len);

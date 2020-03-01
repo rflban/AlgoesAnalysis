@@ -111,7 +111,7 @@ int main(int argc, char **argv)
 void test(void (*sort)(int *, int, bool (*)(int, int)),
           void (*fill)(int *, int))
 {
-    TimeInt timesum = 0;
+    TimeInt timesum;
     Moment t1, t2;
     int data[maxQty];
 

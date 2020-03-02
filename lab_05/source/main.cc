@@ -319,7 +319,7 @@ int main(int argc, char **argv)
 
     std::cin >> n;
 
-    if (!std::cin.good())
+    if (!std::cin.good() || n <= 0)
     {
         exit(1);
     }
@@ -421,12 +421,12 @@ void timeTest(bool useConveyor)
     TimePoint t1, t2;
     std::chrono::steady_clock::rep time_sum = 0;
 
-    int n = 10;
-    int h = 10;
+    int n = 100;
+    int h = 100;
     int maxN = 1000;
     int repeatsQty = 5;
 
-    int msize = 10;
+    int msize = 101;
     double **res = Util::createMatrix<double>(msize, msize);
     double **matrix1 = Util::createMatrix<double>(msize, msize);
     double **matrix2 = Util::createMatrix<double>(msize, msize);
@@ -445,14 +445,14 @@ void timeTest(bool useConveyor)
             {
                 MatrixMulRepeater mmr(n, matrix1, matrix2, msize, msize, msize);
 
-                t1 = tick();
-
                 auto thread1 = std::thread(Conveyor::do1, &mmr);
                 auto thread2 = std::thread(Conveyor::do2);
                 auto thread3 = std::thread(Conveyor::do3);
                 auto thread4 = std::thread(Conveyor::do4);
                 auto thread5 = std::thread(Conveyor::do5);
                 auto thread6 = std::thread(Conveyor::do6);
+
+                t1 = tick();
 
                 thread1.join();
                 thread2.join();
@@ -480,7 +480,15 @@ void timeTest(bool useConveyor)
 
                 for (int i = 0; i < n; i++)
                 {
-                    MatrixMul(res, matrix1, matrix2, msize, msize, msize);
+                    struct MatrixMul mm(matrix1, matrix2, msize, msize, msize);
+                    mm.allocateMemory();
+                    mm.calculateMulh();
+                    mm.calculateMulv();
+                    mm.calculatePart1();
+                    mm.calculatePart2();
+                    mm.calculateUneven();
+                    delete[] mm.res;
+                    //MatrixMul(res, matrix1, matrix2, msize, msize, msize);
                 }
 
                 t2 = tick();

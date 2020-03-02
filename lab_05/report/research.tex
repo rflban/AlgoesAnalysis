@@ -1,0 +1,68 @@
+\chapter{Исследовательский раздел}
+\label{cha:research}
+
+В данном разделе будут производиться эксперементы над корректно реализованной программой.
+
+\section{Эксперименты по замеру времени}
+
+Данный эксперимент состоит в перемножении определенного количества квадратных матриц одинакового размера. Результаты изображены на графиках зависимости времени выполнения от количества матриц.
+
+На рисунке \ref{img:even} приведен график сравнения последовательного умножения матриц и конвейерного. Размер матриц равен 100.
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            width=0.8*\linewidth,
+            xlabel={Кол-во матриц},
+            ylabel={Время (нс)},
+            grid=major,
+            legend pos=north west,
+            xtick={0,100,...,1000}
+        ]
+
+        \addplot[color=red]
+            table[x=qty,y=time,col sep=comma]{./data/leven.csv};
+        \addplot[color=green]
+            table[x=qty,y=time,col sep=comma]{./data/ceven.csv};
+        \legend{последовательные умножения, конвейерные умножения}
+
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Чётная длина, сравнение последовательных и конвейерных вычислений}
+    \label{img:even}
+\end{figure}
+
+На рисунке \ref{img:uneven} приведен график сравнения последовательного умножения матриц и конвейерного. Размер матриц равен 101.
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            width=0.8*\linewidth,
+            xlabel={Кол-во матриц},
+            ylabel={Время (нс)},
+            grid=major,
+            legend pos=north west,
+            xtick={0,100,...,1000}
+        ]
+
+        \addplot[color=red]
+            table[x=qty,y=time,col sep=comma]{./data/luneven.csv};
+        \addplot[color=green]
+            table[x=qty,y=time,col sep=comma]{./data/cuneven.csv};
+        \legend{непараллелизированный, 1 поток}
+
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Нечётная длина, сравнение последовательных и конвейерных вычислений}
+    \label{img:uneven}
+\end{figure}
+
+Эксперимент ставился пять раз, в графиках приведены средние значения времени.
+
+Данный эксперимент проводился на ноутбуке, подключённом к сети питания. Модель процессора ноутбука: Intel i5-8400H с максимальной тактовой частотой 2.500 ГГц в обычном режиме и 8 логическими ядрами.
+
+\section{Вывод}
+Исходя из полученных графиков, можно заключить, что конвейерные вычисления дают прирост в скорости по сравнению с последовательными.
+

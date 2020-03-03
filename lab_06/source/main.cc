@@ -6,8 +6,23 @@
 
 using namespace std;
 
-int main()
+int main(int argc, char **argv)
 {
+    Salesman *salesman = new AntColony;
+
+    for (int i = 1; i < argc; i++)
+    {
+        if (argv[i][0] == '1')
+        {
+            delete salesman;
+            salesman = new BruteSalesman;
+        }
+        if (argv[i][0] == '2')
+        {
+            // skip
+        }
+    }
+
     size_t n;
 
     cin >> n;
@@ -20,16 +35,13 @@ int main()
     size_t dist;
     size_t **way;
 
-    //BruteSalesman s;
-    //s.set(distances, n);
-    //way = s(dist);
-
-    AntColony a;
-    a.set(distances, n);
-    way = a(dist);
+    salesman->set(distances, n);
+    way = (*salesman)(dist);
 
     Util::typeMatrix(way, 1, n);
     cout << dist << '\n';
+
+    delete salesman;
 
     delete[] way;
     delete[] distances;

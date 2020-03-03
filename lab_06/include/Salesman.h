@@ -6,6 +6,8 @@
 class Salesman
 {
 public:
+    virtual ~Salesman() = default;
+
     inline
     void set(size_t **distances, size_t len)
     { this->distances = distances; this->len = len; }

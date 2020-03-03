@@ -2,6 +2,7 @@
 
 #include "Utility.h"
 #include "BruteSalesman.h"
+#include "AntColony.h"
 
 using namespace std;
 
@@ -18,10 +19,14 @@ int main()
 
     size_t dist;
     size_t **way;
-    BruteSalesman s;
 
-    s.set(distances, n);
-    way = s(dist);
+    //BruteSalesman s;
+    //s.set(distances, n);
+    //way = s(dist);
+
+    AntColony a;
+    a.set(distances, n);
+    way = a(dist);
 
     Util::typeMatrix(way, 1, n);
     cout << dist << '\n';

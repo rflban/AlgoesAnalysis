@@ -14,6 +14,7 @@ set(INC
 
     include/Salesman.h
     include/BruteSalesman.h
+    include/AntColony.h
 )
 
 set(TSRC
@@ -24,6 +25,7 @@ set(SRC
 
     source/Salesman.cc
     source/BruteSalesman.cc
+    source/AntColony.cc
 )
 
 add_executable(fn_aa_lab_06

@@ -36,13 +36,14 @@ int EditDistanceTester<_Word_t, _WordHandler>::calculate(_Word_t w1, _Word_t w2)
         int **matrix = method->raw(w1, n1, w2, n2);
 
         if (matrix) {
-            for (int i = 0; i < n1; i++) {
-                for (int j = 0; j < n2; j++) {
+            for (int i = 0; i <= n1; i++) {
+                for (int j = 0; j <= n2; j++) {
                     std::cout << matrix[i][j] << " ";
                 }
 
                 std::cout << '\n';
             }
+            std::cout << '\n';
 
             delete[] matrix;
         }
